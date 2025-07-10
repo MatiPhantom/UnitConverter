@@ -19,10 +19,9 @@ public class LengthController {
     }
 
     @PostMapping
-    public String postMethodName(@RequestBody String entity) {
-                
-        return entity;
+    public String convertToLength(@RequestParam("unit") double unit, @RequestParam("from") String from, @RequestParam("to") String to){
+        
+        return "";
     }
-    
     
 }

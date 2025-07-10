@@ -20,7 +20,8 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
+  min-height: 600px;
 }
 
 .header {
@@ -40,21 +41,20 @@ body {
   font-size: 1.1rem;
 }
 
-/* Tab System */
+/* Tab System - Vertical Layout */
 .tabs {
   display: flex;
+  flex-direction: column;
   background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.tab-input {
-  display: none;
+  border-right: 1px solid #e9ecef;
+  width: 200px;
+  float: left;
 }
 
 .tab-label {
-  flex: 1;
+  width: 100%;
   padding: 20px;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   background: #f8f9fa;
   border: none;
@@ -63,6 +63,7 @@ body {
   color: #6c757d;
   transition: all 0.3s ease;
   position: relative;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .tab-label:hover {
@@ -73,28 +74,23 @@ body {
 .tab-input:checked + .tab-label {
   background: white;
   color: #4facfe;
-  border-bottom: 3px solid #4facfe;
+  border-left: 4px solid #4facfe;
+  border-right: none;
 }
 
 .tab-content {
   display: none;
   padding: 40px;
   animation: fadeIn 0.3s ease;
+  min-height: 500px;
+  margin-left: 200px;
+  background: white;
 }
 
-.tab-input:checked + .tab-label + .tab-content {
+#tab-length:checked ~ .length-content,
+#tab-weight:checked ~ .weight-content,
+#tab-temperature:checked ~ .temperature-content {
   display: block;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Form Styles */
@@ -229,9 +225,36 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: row;
+    width: 100%;
+    float: none;
+    overflow-x: auto;
+  }
+
+  .tab-label {
+    min-width: 120px;
+    text-align: center;
+    border-bottom: none;
+    border-right: 1px solid #e9ecef;
+  }
+
+  .tab-input:checked + .tab-label {
+    border-left: none;
+    border-bottom: 3px solid #4facfe;
+  }
+
+  .tab-content {
+    margin-left: 0;
+    padding: 25px;
+    min-height: 400px;
+  }
+
   .container {
     margin: 10px;
+    max-width: 95%;
+    min-height: 500px;
   }
 
   .header {
@@ -240,10 +263,6 @@ body {
 
   .header h1 {
     font-size: 1.5rem;
-  }
-
-  .tab-content {
-    padding: 20px;
   }
 
   .conversion-row {
