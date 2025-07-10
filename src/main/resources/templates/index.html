@@ -1,213 +1,192 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convertidor de Unidades</title>
     <link rel="stylesheet" th:href="@{/css/index/style.css}" />
+    <title>Conversor de Unidades</title>
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>Convertidor de Unidades</h1>
-        <p>Convierte fácilmente entre diferentes unidades</p>
+    <nav class="sidebar">
+      <h1>🔄 Conversor de Unidades</h1>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#longitud" class="nav-link">📏 Longitud</a>
+        </li>
+        <li class="nav-item">
+          <a href="#peso" class="nav-link">⚖️ Peso</a>
+        </li>
+        <li class="nav-item">
+          <a href="#temperatura" class="nav-link">🌡️ Temperatura</a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <!-- Sección de Longitud -->
+      <section id="longitud" class="converter-section">
+        <h2 class="section-title">📏 Conversor de Longitud</h2>
+        <form th:action="@{/convert}" method="post">
+          <div class="form-group">
+            <label for="unit" class="form-label">Valor a convertir:</label>
+            <input
+              type="number"
+              name="unit"
+              class="form-input"
+              placeholder="Ingresa el valor"
+              step="any"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="from" class="form-label">Convertir desde:</label>
+            <select name="from" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="mm">Milímetros (mm)</option>
+              <option value="cm">Centímetros (cm)</option>
+              <option value="m">Metros (m)</option>
+              <option value="km">Kilómetros (km)</option>
+              <option value="in">Pulgadas (in)</option>
+              <option value="ft">Pies (ft)</option>
+              <option value="yd">Yardas (yd)</option>
+              <option value="mi">Millas (mi)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="to" class="form-label">Convertir a:</label>
+            <select name="to" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="mm">Milímetros (mm)</option>
+              <option value="cm">Centímetros (cm)</option>
+              <option value="m">Metros (m)</option>
+              <option value="km">Kilómetros (km)</option>
+              <option value="in">Pulgadas (in)</option>
+              <option value="ft">Pies (ft)</option>
+              <option value="yd">Yardas (yd)</option>
+              <option value="mi">Millas (mi)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="convert-btn">Convertir</button>
+        </form>
+
+        <div class="result-display">
+          Resultado: Ingresa los valores para convertir
+        </div>
+      </section>
+
+      <!-- Sección de Peso -->
+      <section id="peso" class="converter-section">
+        <h2 class="section-title">⚖️ Conversor de Peso</h2>
+        <form>
+          <div class="form-group">
+            <label for="peso-valor" class="form-label"
+              >Valor a convertir:</label
+            >
+            <input
+              type="number"
+              id="peso-valor"
+              class="form-input"
+              placeholder="Ingresa el valor"
+              step="any"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="peso-desde" class="form-label">Convertir desde:</label>
+            <select id="peso-desde" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="mg">Miligramos (mg)</option>
+              <option value="g">Gramos (g)</option>
+              <option value="kg">Kilogramos (kg)</option>
+              <option value="t">Toneladas (t)</option>
+              <option value="oz">Onzas (oz)</option>
+              <option value="lb">Libras (lb)</option>
+              <option value="st">Stones (st)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="peso-hacia" class="form-label">Convertir a:</label>
+            <select id="peso-hacia" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="mg">Miligramos (mg)</option>
+              <option value="g">Gramos (g)</option>
+              <option value="kg">Kilogramos (kg)</option>
+              <option value="t">Toneladas (t)</option>
+              <option value="oz">Onzas (oz)</option>
+              <option value="lb">Libras (lb)</option>
+              <option value="st">Stones (st)</option>
+            </select>
+          </div>
+
+          <button type="button" class="convert-btn">Convertir</button>
+        </form>
+
+        <div class="result-display">
+          Resultado: Ingresa los valores para convertir
+        </div>
+      </section>
+
+      <!-- Sección de Temperatura -->
+      <section id="temperatura" class="converter-section">
+        <h2 class="section-title">🌡️ Conversor de Temperatura</h2>
+        <form>
+          <div class="form-group">
+            <label for="temperatura-valor" class="form-label"
+              >Valor a convertir:</label
+            >
+            <input
+              type="number"
+              id="temperatura-valor"
+              class="form-input"
+              placeholder="Ingresa el valor"
+              step="any"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="temperatura-desde" class="form-label"
+              >Convertir desde:</label
+            >
+            <select id="temperatura-desde" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="c">Celsius (°C)</option>
+              <option value="f">Fahrenheit (°F)</option>
+              <option value="k">Kelvin (K)</option>
+              <option value="r">Rankine (°R)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="temperatura-hacia" class="form-label"
+              >Convertir a:</label
+            >
+            <select id="temperatura-hacia" class="form-select">
+              <option value="">Selecciona una unidad</option>
+              <option value="c">Celsius (°C)</option>
+              <option value="f">Fahrenheit (°F)</option>
+              <option value="k">Kelvin (K)</option>
+              <option value="r">Rankine (°R)</option>
+            </select>
+          </div>
+
+          <button type="button" class="convert-btn">Convertir</button>
+        </form>
+
+        <div class="result-display" th:if="${result==null}">
+          Resultado: Ingresa los valores para convertir
+        </div>
+      </section>
+
+      <!-- Sección de Bienvenida -->
+      <div class="welcome-section">
+        <h2>Bienvenido al Conversor de Unidades</h2>
+        <p>
+          Selecciona una categoría del menú lateral para comenzar a convertir
+        </p>
       </div>
-
-      <div class="tabs">
-        <input
-          type="radio"
-          id="tab-length"
-          name="tab"
-          class="tab-input"
-          checked
-        />
-        <label for="tab-length" class="tab-label">Longitud</label>
-        <div class="tab-content">
-          <form class="converter-form" action="#" method="post">
-            <div class="form-group">
-              <label for="length-value">Valor a convertir</label>
-              <input
-                type="number"
-                id="length-value"
-                name="value"
-                placeholder="Ingresa el valor"
-                step="any"
-                required
-              />
-            </div>
-
-            <div class="conversion-row">
-              <div class="form-group">
-                <label for="from-length">Desde</label>
-                <select id="from-length" name="from" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="mm">Milímetro (mm)</option>
-                  <option value="cm">Centímetro (cm)</option>
-                  <option value="m">Metro (m)</option>
-                  <option value="km">Kilómetro (km)</option>
-                  <option value="in">Pulgada (in)</option>
-                  <option value="ft">Pie (ft)</option>
-                  <option value="yd">Yarda (yd)</option>
-                  <option value="mi">Milla (mi)</option>
-                </select>
-              </div>
-
-              <div class="arrow">→</div>
-
-              <div class="form-group">
-                <label for="to-length">Hacia</label>
-                <select id="to-length" name="to" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="mm">Milímetro (mm)</option>
-                  <option value="cm">Centímetro (cm)</option>
-                  <option value="m">Metro (m)</option>
-                  <option value="km">Kilómetro (km)</option>
-                  <option value="in">Pulgada (in)</option>
-                  <option value="ft">Pie (ft)</option>
-                  <option value="yd">Yarda (yd)</option>
-                  <option value="mi">Milla (mi)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="button-group">
-              <button type="submit" class="btn btn-primary">Convert</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
-
-            <div class="result">
-              <h3>Resultado de la conversión</h3>
-              <p>20 ft = 609.6 cm</p>
-              <small
-                >*Ejemplo de conversión - Funcionalidad completa requiere
-                JavaScript</small
-              >
-            </div>
-          </form>
-        </div>
-
-        <input type="radio" id="tab-weight" name="tab" class="tab-input" />
-        <label for="tab-weight" class="tab-label">Peso</label>
-        <div class="tab-content">
-          <form class="converter-form" action="#" method="post">
-            <div class="form-group">
-              <label for="weight-value">Valor a convertir</label>
-              <input
-                type="number"
-                id="weight-value"
-                name="value"
-                placeholder="Ingresa el valor"
-                step="any"
-                required
-              />
-            </div>
-
-            <div class="conversion-row">
-              <div class="form-group">
-                <label for="from-weight">Desde</label>
-                <select id="from-weight" name="from" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="mg">Miligramo (mg)</option>
-                  <option value="g">Gramo (g)</option>
-                  <option value="kg">Kilogramo (kg)</option>
-                  <option value="t">Tonelada (t)</option>
-                  <option value="oz">Onza (oz)</option>
-                  <option value="lb">Libra (lb)</option>
-                  <option value="st">Stone (st)</option>
-                </select>
-              </div>
-
-              <div class="arrow">→</div>
-
-              <div class="form-group">
-                <label for="to-weight">Hacia</label>
-                <select id="to-weight" name="to" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="mg">Miligramo (mg)</option>
-                  <option value="g">Gramo (g)</option>
-                  <option value="kg">Kilogramo (kg)</option>
-                  <option value="t">Tonelada (t)</option>
-                  <option value="oz">Onza (oz)</option>
-                  <option value="lb">Libra (lb)</option>
-                  <option value="st">Stone (st)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="button-group">
-              <button type="submit" class="btn btn-primary">Convert</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
-
-            <div class="result">
-              <h3>Resultado de la conversión</h3>
-              <p>5 kg = 11.02 lb</p>
-              <small
-                >*Ejemplo de conversión - Funcionalidad completa requiere
-                JavaScript</small
-              >
-            </div>
-          </form>
-        </div>
-
-        <input type="radio" id="tab-temperature" name="tab" class="tab-input" />
-        <label for="tab-temperature" class="tab-label">Temperatura</label>
-        <div class="tab-content">
-          <form class="converter-form" action="#" method="post">
-            <div class="form-group">
-              <label for="temp-value">Valor a convertir</label>
-              <input
-                type="number"
-                id="temp-value"
-                name="value"
-                placeholder="Ingresa el valor"
-                step="any"
-                required
-              />
-            </div>
-
-            <div class="conversion-row">
-              <div class="form-group">
-                <label for="from-temp">Desde</label>
-                <select id="from-temp" name="from" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="c">Celsius (°C)</option>
-                  <option value="f">Fahrenheit (°F)</option>
-                  <option value="k">Kelvin (K)</option>
-                  <option value="r">Rankine (°R)</option>
-                </select>
-              </div>
-
-              <div class="arrow">→</div>
-
-              <div class="form-group">
-                <label for="to-temp">Hacia</label>
-                <select id="to-temp" name="to" required>
-                  <option value="">Seleccionar unidad</option>
-                  <option value="c">Celsius (°C)</option>
-                  <option value="f">Fahrenheit (°F)</option>
-                  <option value="k">Kelvin (K)</option>
-                  <option value="r">Rankine (°R)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="button-group">
-              <button type="submit" class="btn btn-primary">Convert</button>
-              <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
-
-            <div class="result">
-              <h3>Resultado de la conversión</h3>
-              <p>25°C = 77°F</p>
-              <small
-                >*Ejemplo de conversión - Funcionalidad completa requiere
-                JavaScript</small
-              >
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    </main>
   </body>
 </html>
