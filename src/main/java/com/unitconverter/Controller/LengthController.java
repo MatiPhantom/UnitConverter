@@ -1,5 +1,7 @@
 package com.unitconverter.Controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/length")
 @Slf4j
 public class LengthController {
+
+    private Map<String,String> unitie;
 
     @Autowired
     private LengthService lengthService;
