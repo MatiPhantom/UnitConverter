@@ -21,8 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LengthController {
 
-    private Map<String,String> unitie;
-
     @Autowired
     private LengthService lengthService;
     @GetMapping

@@ -27,8 +27,8 @@
             <option value="">Selecciona una unidad</option>
             <option
               th:each="unit : ${unities}"
-              th:value="${unit}"
-              th:text="${unit}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
             ></option>
             <!--<option value="mm">Milímetros (mm)</option>
             <option value="cm">Centímetros (cm)</option>
@@ -47,8 +47,8 @@
             <option value="">Selecciona una unidad</option>
             <option
               th:each="unit : ${unities}"
-              th:value="${unit}"
-              th:text="${unit}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
             ></option>
           </select>
         </div>
