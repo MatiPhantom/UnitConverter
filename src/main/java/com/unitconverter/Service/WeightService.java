@@ -1,5 +1,6 @@
 package com.unitconverter.Service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,35 +24,31 @@ public class WeightService {
 
     private Set<String> keys;
 
-    private final List<String> values = List.of("Nanómetro",
-    "Micrómetro",
-    "Milímetro",
-    "Centímetro",
-    "Metro",
-    "Kilómetro",
-    "Pulgada",
-    "Yarda",
-    "Pie (EE.UU.)",
-    "Pie",
-    "Braza",
-    "Milla",
-    "Milla náutica");
+    private final List<String> values = Arrays.asList(
+    "Microgramo",
+    "Miligramo",
+    "Gramo",
+    "Kilogramo",
+    "Megatonelada",
+    "Onza",
+    "Libra",
+    "Tonelada"
+    );
 
     @PostConstruct
     private void initComponenets(){
-        this.keys = new HashSet<>(client.getUnities("length"));
+        this.keys = new HashSet<>(client.getUnities("mass"));
         for (int i = 0; i < keys.size(); i++) {
             this.unities.put(this.keys.toArray()[i].toString(), this.values.get(i));
         }
     }
     
     public Map<String, String> getUnities(){
-        
         return unities;
     }
 
     public String convertTo(double value, String from, String to){
-        return client.convertTo("length", value, from, to);
+        return client.convertTo("mass", value, from, to);
     }
 
 
