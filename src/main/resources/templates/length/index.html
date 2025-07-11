@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header th:replace="~{/common/header :: header}"></header>
+    <section id="longitud" class="converter-section">
+      <h2 class="section-title">📏 Conversor de Longitud</h2>
+      <form th:action="@{/length/convert}" method="post">
+        <div class="form-group">
+          <label for="unit" class="form-label">Valor a convertir:</label>
+          <input
+            type="number"
+            name="value"
+            class="form-input"
+            placeholder="Ingresa el valor"
+            step="any"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="from" class="form-label">Convertir desde:</label>
+          <select name="from" class="form-select">
+            <option value="">Selecciona una unidad</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit}"
+              th:text="${unit}"
+            ></option>
+            <!--<option value="mm">Milímetros (mm)</option>
+            <option value="cm">Centímetros (cm)</option>
+            <option value="m">Metros (m)</option>
+            <option value="km">Kilómetros (km)</option>
+            <option value="in">Pulgadas (in)</option>
+            <option value="ft">Pies (ft)</option>
+            <option value="yd">Yardas (yd)</option>
+            <option value="mi">Millas (mi)</option>-->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="to" class="form-label">Convertir a:</label>
+          <select name="to" class="form-select">
+            <option value="">Selecciona una unidad</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit}"
+              th:text="${unit}"
+            ></option>
+          </select>
+        </div>
+
+        <button type="submit" class="convert-btn">Convertir</button>
+      </form>
+
+      <div class="result-display" th:if="${result!=null}">
+        <p th:text="'RESULTADO: '+${result}"></p>
+      </div>
+    </section>
+  </body>
+</html>

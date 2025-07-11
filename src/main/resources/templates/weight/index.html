@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header th:replace="~{/common/header :: header}"></header>
+    <section id="peso" class="converter-section">
+      <h2 class="section-title">⚖️ Conversor de Peso</h2>
+      <form>
+        <div class="form-group">
+          <label for="peso-valor" class="form-label">Valor a convertir:</label>
+          <input
+            type="number"
+            id="peso-valor"
+            class="form-input"
+            placeholder="Ingresa el valor"
+            step="any"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="peso-desde" class="form-label">Convertir desde:</label>
+          <select id="peso-desde" class="form-select">
+            <option value="">Selecciona una unidad</option>
+            <option value="mg">Miligramos (mg)</option>
+            <option value="g">Gramos (g)</option>
+            <option value="kg">Kilogramos (kg)</option>
+            <option value="t">Toneladas (t)</option>
+            <option value="oz">Onzas (oz)</option>
+            <option value="lb">Libras (lb)</option>
+            <option value="st">Stones (st)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="peso-hacia" class="form-label">Convertir a:</label>
+          <select id="peso-hacia" class="form-select">
+            <option value="">Selecciona una unidad</option>
+            <option value="mg">Miligramos (mg)</option>
+            <option value="g">Gramos (g)</option>
+            <option value="kg">Kilogramos (kg)</option>
+            <option value="t">Toneladas (t)</option>
+            <option value="oz">Onzas (oz)</option>
+            <option value="lb">Libras (lb)</option>
+            <option value="st">Stones (st)</option>
+          </select>
+        </div>
+
+        <button type="button" class="convert-btn">Convertir</button>
+      </form>
+
+      <div class="result-display" th:if="${result!=null}">
+        Resultado: Ingresa los valores para convertir
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,14 +1,16 @@
 package com.unitconverter.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.unitconverter.ApiClient.ConvertApiClient;
+import com.unitconverter.Service.LengthService;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -16,18 +18,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/length")
 @Slf4j
 public class LengthController {
+
+    @Autowired
+    private LengthService lengthService;
     @GetMapping
-    public String index() {
-        log.info("RETORNANDO VISTA");
-        System.out.println("RETORNANDO VISTA");
-        return "index";
+    public String index(Model model) {
+        model.addAttribute("unities", lengthService.getUnities());
+        return "length/index";
     }
 
     @PostMapping("/convert")
-    public String convertToLength(@RequestParam("unit") double unit, @RequestParam("from") String from, @RequestParam("to") String to){
-        System.out.println("RETORNANDO VISTA");
-        log.info("---------------------------Numero a convertir es: "+unit+" de "+from+" a "+to);
-        return "index";
+    public String convertToLength(@RequestParam("value") double value, @RequestParam("from") String from, @RequestParam("to") String to,RedirectAttributes redirect ){
+        String result=lengthService.convertTo(value, from, to);
+        redirect.addFlashAttribute("result",result);
+        return "redirect:/length";
     }
     
 }

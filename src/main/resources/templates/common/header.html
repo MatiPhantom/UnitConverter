@@ -6,8 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <a th:href="@{/length}">CALCULAR LONGITUD</a>
-    <a th:href="@{/weight}">CALCULAR PESO</a>
-    <a th:href="@{/temperature}">CALCULAR TEMPERATURA</a>
+    <div th:fragment="header">
+      <a th:href="@{/length}">Longitud</a>
+      <a th:href="@{/weight}">Peso</a>
+      <a th:href="@{/temperature}">Temperatura</a>
+    </div>
   </body>
 </html>
