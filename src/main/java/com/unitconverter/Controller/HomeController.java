@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-@RequestMapping("unitconverter/")    
+@RequestMapping("/")    
 public class HomeController {
     @GetMapping
     public String index() {
