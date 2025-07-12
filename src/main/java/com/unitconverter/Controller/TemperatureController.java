@@ -3,6 +3,7 @@ package com.unitconverter.Controller;
 import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,28 +13,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.unitconverter.Service.TemperatureService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 
 @Controller
+@Slf4j
 @RequestMapping("/temperature")
 public class TemperatureController {
     @Autowired
+    @Lazy
     private TemperatureService service;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(required = false, name = "result") String result) {
         model.addAttribute("unities", service.getUnities()); 
-
-        return "temperature/index";
-    }
-
-    @GetMapping("/{result}")
-    public String index(Model model,@PathVariable double result) {
-        model.addAttribute("unities", service.getUnities()); 
-        model.addAttribute("result", result);
+            model.addAttribute("result", result);     
         return "temperature/index";
     }
 

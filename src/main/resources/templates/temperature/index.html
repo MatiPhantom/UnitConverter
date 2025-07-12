@@ -9,7 +9,7 @@
     <header th:replace="~{/common/header :: header}"></header>
     <section id="temperatura" class="converter-section">
       <h2 class="section-title">🌡️ Conversor de Temperatura</h2>
-      <form>
+      <form th:action="@{/temperature/convert}" method="post">
         <div class="form-group">
           <label for="value" class="form-label">Valor a convertir:</label>
           <input
@@ -23,10 +23,10 @@
         </div>
 
         <div class="form-group">
-          <label for="temperatura-desde" class="form-label"
+          <label for="from" class="form-label"
             >Convertir desde:</label
           >
-          <select id="temperatura-desde" class="form-select">
+          <select id="temperatura-desde" name="from" class="form-select">
             <option value="">Selecciona una unidad</option>
             <option
               th:each="unit : ${unities}"
@@ -37,8 +37,8 @@
         </div>
 
         <div class="form-group">
-          <label for="temperatura-hacia" class="form-label">Convertir a:</label>
-          <select id="temperatura-hacia" class="form-select">
+          <label for="to" class="form-label">Convertir a:</label>
+          <select id="temperatura-hacia" name="to" class="form-select">
             <option value="">Selecciona una unidad</option>
             <option
               th:each="unit : ${unities}"
