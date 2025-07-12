@@ -9,12 +9,12 @@
     <header th:replace="~{/common/header :: header}"></header>
     <section id="peso" class="converter-section">
       <h2 class="section-title">⚖️ Conversor de Peso</h2>
-      <form>
+      <form th:action="@{/weight/convert}" method="post">
         <div class="form-group">
           <label for="peso-valor" class="form-label">Valor a convertir:</label>
           <input
             type="number"
-            id="peso-valor"
+            name="value"
             class="form-input"
             placeholder="Ingresa el valor"
             step="any"
@@ -22,38 +22,34 @@
         </div>
 
         <div class="form-group">
-          <label for="peso-desde" class="form-label">Convertir desde:</label>
-          <select id="peso-desde" class="form-select">
+          <label for="from" class="form-label">Convertir desde:</label>
+          <select id="peso-desde" name="from" class="form-select">
             <option value="">Selecciona una unidad</option>
-            <option value="mg">Miligramos (mg)</option>
-            <option value="g">Gramos (g)</option>
-            <option value="kg">Kilogramos (kg)</option>
-            <option value="t">Toneladas (t)</option>
-            <option value="oz">Onzas (oz)</option>
-            <option value="lb">Libras (lb)</option>
-            <option value="st">Stones (st)</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
+            ></option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="peso-hacia" class="form-label">Convertir a:</label>
-          <select id="peso-hacia" class="form-select">
+          <label for="to" class="form-label">Convertir a:</label>
+          <select id="peso-hacia" name="to" class="form-select">
             <option value="">Selecciona una unidad</option>
-            <option value="mg">Miligramos (mg)</option>
-            <option value="g">Gramos (g)</option>
-            <option value="kg">Kilogramos (kg)</option>
-            <option value="t">Toneladas (t)</option>
-            <option value="oz">Onzas (oz)</option>
-            <option value="lb">Libras (lb)</option>
-            <option value="st">Stones (st)</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
+            ></option>
           </select>
         </div>
 
-        <button type="button" class="convert-btn">Convertir</button>
+        <button type="submit" class="convert-btn">Convertir</button>
       </form>
 
       <div class="result-display" th:if="${result!=null}">
-        Resultado: Ingresa los valores para convertir
+        <p th:text="'RESULTADO: '+${result}"></p>
       </div>
     </section>
   </body>

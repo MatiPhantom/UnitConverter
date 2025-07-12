@@ -7,19 +7,21 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.unitconverter.ApiClient.ConvertApiClient;
 
 import jakarta.annotation.PostConstruct;
 
+@Lazy
 @Service
 public class LengthService {
 
     @Autowired
     private ConvertApiClient client;
 
-    private Map<String, String> unities= new HashMap<>();
+    private final Map<String, String> unities= new HashMap<>();
 
     private Set<String> keys;
 

@@ -37,6 +37,7 @@ public class ConvertApiClient {
             log.error("Error de cliente " + response.statusCode());
         }
         unities= mapper.readValue(response.body(), new TypeReference<List<String>>(){});
+        log.info("Unidades pedidas: "+unities);
         }catch(Exception e){
             log.error("Error al obtener las unidades de longitud");
         }

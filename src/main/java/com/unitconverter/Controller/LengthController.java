@@ -3,6 +3,7 @@ package com.unitconverter.Controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +23,19 @@ import lombok.extern.slf4j.Slf4j;
 public class LengthController {
 
     @Autowired
+    @Lazy
     private LengthService lengthService;
     @GetMapping
     public String index(Model model) {
         model.addAttribute("unities", lengthService.getUnities());
+        log.info("Unidades de longitud cargadas: " + lengthService.getUnities());
         return "length/index";
     }
 
     @PostMapping("/convert")
     public String convertToLength(@RequestParam("value") double value, @RequestParam("from") String from, @RequestParam("to") String to,RedirectAttributes redirect ){
         String result=lengthService.convertTo(value, from, to);
+        log.info("Conversion de longitud: {} {} a {}", value, from, to);
         redirect.addFlashAttribute("result",result);
         return "redirect:/length";
     }
