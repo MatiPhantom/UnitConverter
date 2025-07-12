@@ -38,12 +38,12 @@ public class WeightService {
 
     @PostConstruct
     private void initComponents(){
-        List<String> keys = new ArrayList<>(client.getUnities("mass"));
-        for (int i = 0; i < keys.size(); i++) {
-            this.unities.put(keys.toArray()[i].toString(), this.values.get(i));
+        if(unities.isEmpty()) { // Solo inicializa si está vacío
+            List<String> keys = new ArrayList<>(client.getUnities("mass"));
+            for (int i = 0; i < keys.size(); i++) {
+                this.unities.put(keys.toArray()[i].toString(), this.values.get(i));
+            }
         }
-        
-        
     }
     
     public Map<String, String> getUnities(){

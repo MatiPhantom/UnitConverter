@@ -1,7 +1,9 @@
 package com.unitconverter.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,9 +23,7 @@ public class LengthService {
     @Autowired
     private ConvertApiClient client;
 
-    private final Map<String, String> unities= new HashMap<>();
-
-    private Set<String> keys;
+    private final LinkedHashMap<String, String> unities= new LinkedHashMap<>();
 
     private final List<String> values = List.of("Nanómetro",
     "Micrómetro",
@@ -41,10 +41,13 @@ public class LengthService {
 
     @PostConstruct
     private void initComponenets(){
-        this.keys = new HashSet<>(client.getUnities("length"));
-        for (int i = 0; i < keys.size(); i++) {
-            this.unities.put(this.keys.toArray()[i].toString(), this.values.get(i));
-        }
+        if (unities.isEmpty()) { // Solo inicializa si está vacío
+            List<String> keys = new ArrayList<>(client.getUnities("length"));
+            for (int i = 0; i < keys.size(); i++) {
+                this.unities.put(keys.toArray()[i].toString(), this.values.get(i));
+            }
+        }   
+        
     }
     
     public Map<String, String> getUnities(){
