@@ -55,7 +55,7 @@ public class ConvertApiClient {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             JsonNode node=mapper.readTree(response.body());
             String result=node.get("result").asText();
-            log.info("Resultado: "+result);
+            log.info("Resultado de la petición: "+result);
             return result;  
         }catch(Exception e){
             log.error("Error al obtener las unidades de longitud");

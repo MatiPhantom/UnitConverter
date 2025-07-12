@@ -28,7 +28,6 @@ public class LengthController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("unities", lengthService.getUnities());
-        log.info("Unidades de longitud cargadas: " + lengthService.getUnities());
         return "length/index";
     }
 
