@@ -11,12 +11,11 @@
       <h2 class="section-title">🌡️ Conversor de Temperatura</h2>
       <form>
         <div class="form-group">
-          <label for="temperatura-valor" class="form-label"
-            >Valor a convertir:</label
-          >
+          <label for="value" class="form-label">Valor a convertir:</label>
           <input
             type="number"
             id="temperatura-valor"
+            name="value"
             class="form-input"
             placeholder="Ingresa el valor"
             step="any"
@@ -29,10 +28,11 @@
           >
           <select id="temperatura-desde" class="form-select">
             <option value="">Selecciona una unidad</option>
-            <option value="c">Celsius (°C)</option>
-            <option value="f">Fahrenheit (°F)</option>
-            <option value="k">Kelvin (K)</option>
-            <option value="r">Rankine (°R)</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
+            ></option>
           </select>
         </div>
 
@@ -40,19 +40,19 @@
           <label for="temperatura-hacia" class="form-label">Convertir a:</label>
           <select id="temperatura-hacia" class="form-select">
             <option value="">Selecciona una unidad</option>
-            <option value="c">Celsius (°C)</option>
-            <option value="f">Fahrenheit (°F)</option>
-            <option value="k">Kelvin (K)</option>
-            <option value="r">Rankine (°R)</option>
+            <option
+              th:each="unit : ${unities}"
+              th:value="${unit.key}"
+              th:text="${unit.value}"
+            ></option>
           </select>
         </div>
 
-        <button type="button" class="convert-btn">Convertir</button>
+        <button type="submit" class="convert-btn">Convertir</button>
       </form>
 
-      <div class="result-display" th:if="${result==null}">
-        Resultado: Ingresa los valores para convertir
-      </div>
+      <div class="result-display" th:if="${result!=null}">
+        <p th:text="'RESULTADO: ' + ${result}"></p>
     </section>
   </body>
 </html>
